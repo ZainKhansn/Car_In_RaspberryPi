@@ -2,7 +2,7 @@ import time
 import RPi.GPIO as GPIO
 import numpy as np
 w = 1
-x = 1
+x =10
 REVOLUTION_STEP_NUMBER = 2048
 
 
@@ -128,6 +128,7 @@ try:
                 p.ChangeDutyCycle(100)
                 p2.ChangeDutyCycle(100)
             elif x == "a" and a ==0:
+                s=0
                 a2 = 1
                 w=0
                 d2 = 0
@@ -144,7 +145,7 @@ try:
                 if a == 1:
                     pass
             elif x == "d" and d == 0:
-
+                s = 0
                 a2 = 0
                 d2 =1
                 w= 0
@@ -159,7 +160,7 @@ try:
                 initW = 0
                 if d ==1:
                     pass
-            elif x == "w" and w == 0 and a2 == 1:
+            elif x == "w" and w == 0 and a2 == 1 and s == 0:
                 GPIO.output(in1,GPIO.HIGH)
                 GPIO.output(in2,GPIO.LOW)
                 GPIO.output(in3,GPIO.HIGH)
@@ -175,43 +176,54 @@ try:
                 if w ==1:
                     pass
 
-            elif x == "w" and w == 0 and d2 == 1:
+            elif x == "w" and w == 0 and d2 == 1 and s == 0:
                 GPIO.output(in1,GPIO.HIGH)
                 GPIO.output(in2,GPIO.LOW)
                 GPIO.output(in3,GPIO.HIGH)
-                GPIO.output(in4,GPIO.LOW) 
+                GPIO.output(in4,GPIO.LOW)
+                motor.rotate(direction=True, degrees=dg3)
                 a = 0
                 d = 0
                 a2 = 0
                 d2 = 0
                 w+=1
                 initW = 1 
-                motor.rotate(direction=True, degrees=dg3)
+                if w ==1:
+                    pass
+
             elif x == "w":
                 GPIO.output(in1,GPIO.HIGH)
                 GPIO.output(in2,GPIO.LOW)
                 GPIO.output(in3,GPIO.HIGH)
                 GPIO.output(in4,GPIO.LOW) 
-                if w ==1:
+                if w == 1:
                     pass
-
-            elif x=='s' and w == 0 and d2 ==1:
+            elif x=='s' and w == 0 and d2 ==1 and s == 0:
+                if s ==1:
+                    pass
                 motor.rotate(direction=True, degrees=dg3)
                 GPIO.output(in1,GPIO.LOW)
                 GPIO.output(in2,GPIO.HIGH)
                 GPIO.output(in3,GPIO.LOW)
                 GPIO.output(in4,GPIO.HIGH)
-            elif x=='s' and w == 0 and a2 ==1:
+                s+=1
+            elif x=='s' and w == 0 and a2 ==1 and s == 0:
                 motor.rotate(direction=False, degrees=dg3)
-                GPIO.output(in1,GPIO.LOW)
-                GPIO.output(in2,GPIO.HIGH)
-                GPIO.output(in3,GPIO.LOW)
-                GPIO.output(in4,GPIO.HIGH)
+                GPIO.output(in1,GPIO.HIGH)
+                GPIO.output(in2,GPIO.LOW)
+                GPIO.output(in3,GPIO.HIGH)
+                GPIO.output(in4,GPIO.LOW)
+                s+=1
+                if s ==1:
+                    pass
             elif x=='s':
                 GPIO.output(in1,GPIO.LOW)
                 GPIO.output(in2,GPIO.HIGH)
                 GPIO.output(in3,GPIO.LOW)
                 GPIO.output(in4,GPIO.HIGH)
+                s+=1
+                if s == 1:
+                    pass
             else:
                 pass
 
