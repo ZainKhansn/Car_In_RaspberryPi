@@ -3,11 +3,7 @@ import RPi.GPIO as GPIO
 import numpy as np
 w = 1
 REVOLUTION_STEP_NUMBER = 2048
-# Python Script
-# https://www.electronicshub.org/raspberry-pi-l298n-interface-tutorial-control-dc-motor-l298n-raspberry-pi/
 
-import RPi.GPIO as GPIO          
-from time import sleep
 
 in1 = 15
 in2 = 18
@@ -30,10 +26,12 @@ GPIO.output(in3,GPIO.LOW)
 GPIO.output(in4,GPIO.LOW)
 p=GPIO.PWM(en,1000)
 
-p.start(25)
+p.start(100)
 p2=GPIO.PWM(enb,1000)
 
-p2.start(25)
+p2.start(100)
+
+GPIO.setwarnings(False)
 print("\n")
 print("The default speed & direction of motor is LOW & Forward.....")
 print("^c-stop/exit w-forward s-backward d-right a-left l-low m-medium h-high")
@@ -93,8 +91,9 @@ class StepperMotor(object):
         """
         step_number = int(REVOLUTION_STEP_NUMBER * degrees / 360)
         for i in range(0, step_number):
-            print(degrees)
-   
+            degrees = str(degrees)
+            print("Turning " + degrees+ " degrees.")
+            degrees = float(degrees)
             self.rotate_segment(direction=direction)
             time.sleep(.002)
    
@@ -125,8 +124,8 @@ try:
 
             elif x=='h':
                 print("high")
-                p.ChangeDutyCycle(75)
-                p2.ChangeDutyCycle(75)
+                p.ChangeDutyCycle(100)
+                p2.ChangeDutyCycle(100)
             elif x == "a" and a ==0:
                 a2 = 1
                 w=0
