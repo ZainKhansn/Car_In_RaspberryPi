@@ -34,7 +34,7 @@ p2.start(100)
 
 GPIO.setwarnings(False)
 print("\n")
-print("The default speed & direction of motor is LOW & Forward.....")
+print("The default speed & direction of motor is HIGH")
 print("^c-stop/exit w-forward s-backward d-right a-left l-low m-medium h-high")
 print("\n")      
 GPIO_PIN_LIST = [4, 17, 27, 22]
