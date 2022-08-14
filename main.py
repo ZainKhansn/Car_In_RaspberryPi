@@ -2,6 +2,7 @@ import time
 import RPi.GPIO as GPIO
 import numpy as np
 w = 1
+x = 1
 REVOLUTION_STEP_NUMBER = 2048
 
 
